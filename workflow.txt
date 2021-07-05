@@ -1,0 +1,6 @@
+
+Lists tasks in :
+a) smart contract
+b) console
+c) client side app
+d) test

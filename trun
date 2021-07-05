@@ -1,0 +1,6 @@
+#! /bin/sh
+echo "1"
+truffle compile
+wait 10
+echo "2."
+truffle migrate $1
