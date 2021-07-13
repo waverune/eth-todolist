@@ -17,13 +17,13 @@ contract  PostBoard{
   mapping(address => uint) ownerPostCount;
 
   constructor() public {
-
+    createPost(11,"bingo");
   }
 
   function createPost(uint _endTime, string memory _content) public{
-    uint  _uuid = _generateUUID(_content);
-    uint _postId = posts.push( Post(_uuid,_content) ) - 1 ;
-    postsEndTime[_postId] = uint(now + (_endTime*86400));
+
+    uint _postId = posts.push( Post( _generateUUID(_content), _content) ) - 1 ;
+    postsEndTime.push(uint(now + (_endTime*86400)));
     postToOwner[_postId] = msg.sender;
     ownerPostCount[msg.sender]++;
   }

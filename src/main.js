@@ -1,7 +1,7 @@
 
 
 contractJSON = {
- 
+
 }
 
   // import contractJSON from '../build/contracts/TodoList.json'
@@ -32,8 +32,8 @@ contractJSON = {
 
 //instance
 //acs =  (web3.eth.getAccounts(console.log) );
-const a0 =  '0x881989B612e7Fc2465fF9D50cf44037E0802507C';   // default account
-contract_address ='0x598231F4B42cFeE0366F425CF71CE44c9Bb161fa';   // deployed contract address on the blockchain blocka blockchain
+const a0 =  '0xcf0C7Ec1688e60aaE15eA8d9b0c789b43F196c30';   // default account
+contract_address = '0x316a2E22F0aE0b15a73457ecbf665DCaE99Aa153' ;   // deployed contract address on the blockchain blocka blockchain
 
 
 
