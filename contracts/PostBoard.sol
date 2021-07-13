@@ -1,8 +1,11 @@
-pragma solidity ^0.5.0;
-contract  PostBoard{
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract  PostBoard is Ownable{
 
 
-  uint randMod = 16;      // uuid
+  uint randMod = 16;      // uuid length
 
   struct Post{
     uint uuid;
@@ -16,24 +19,27 @@ contract  PostBoard{
   mapping(uint => address) postToOwner;
   mapping(address => uint) ownerPostCount;
 
-  constructor() public {
+  constructor() {
     createPost(11,"bingo");
   }
 
   function createPost(uint _endTime, string memory _content) public{
 
-    uint _postId = posts.push( Post( _generateUUID(_content), _content) ) - 1 ;
-    postsEndTime.push(uint(now + (_endTime*86400)));
+  //  uint _postId = posts.push( Post( _generateUUID(_content), _content) ) - 1 ; // earlier push used to return length
+    posts.push( Post( _generateUUID(_content), _content) ) ; //
+
+    uint _postId = posts.length;
+    postsEndTime.push(uint(block.timestamp  + (_endTime*86400)));      // now is deprecated  so,block.timestamp is used
     postToOwner[_postId] = msg.sender;
     ownerPostCount[msg.sender]++;
   }
 
-  function getArray() public view returns(uint[] memory){
+  function getArray() public view onlyOwner returns(uint[] memory){
     return postsEndTime;
   }
 
   //_generateUUID returns randMod digits random num;
-  function _generateUUID(string memory _str) private view returns(uint) {
+  function _generateUUID(string memory _str) private view returns(uint){
     uint rand = uint(keccak256(abi.encodePacked(_str)));
     return  rand % randMod;
   }
