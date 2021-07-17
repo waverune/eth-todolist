@@ -17,4 +17,5 @@ clone the repo
 
 ###  6. install metamask extension in the browser { https://metamask.io }   // crypto wallet
 
-###  7. npm run dev {with liteserver webpage is hosted on localhost}
+###  7. run node script
+    npm run dev
