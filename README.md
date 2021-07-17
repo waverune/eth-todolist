@@ -3,6 +3,9 @@
 clone the repo
 ###  1. install dependencies  {installs dependencies in package.json}
    npm install
+
+### 2. Download Ganache or use ganache-cli { https://www.trufflesuite.com/ganache }  // creates personal ethereum       blockchain w 10 default accounts 100 ether  
+
 ###  3. Run ganache with network port 8545  {or configure port accordingly in truffle-config.js}
 
 ###  4. Run the following commands <br>
