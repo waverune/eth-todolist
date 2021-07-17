@@ -22,7 +22,7 @@ contract  PostBoard is Ownable{
     greet = _greet;   // owners greet just checking getters and setters
   }
 
-/// methods
+  /// methods
 
   function createPost(uint _endTime, string memory _content) public{
 
@@ -35,7 +35,7 @@ contract  PostBoard is Ownable{
     ownerPostCount[msg.sender]++;
   }
 
-  // for optimisation
+  // client side optimisation
   function getEndTimeArray() public view onlyOwner returns(uint[] memory){
     return postsEndTime;
   }
