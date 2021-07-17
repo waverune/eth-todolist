@@ -14,12 +14,12 @@ Share your immutable post for eternity
 
 ##Post
 Each pOst has
-    a)id            postcount
+    a)uuid            postcount
     b)content
-    c)timestamp :   timestamp of post creration
+    c)timestamp :   timestamp of post creation  // no we can get the time
     d)end time :  ater which post no longer needs to be on the webpage
-    e)owner  : whos you daddy
-    f)
+    e)owner  : //
+    f) isDeprecated : flag
 
 P0st can be added once in 24 hours
 P0st endTime can be extended
