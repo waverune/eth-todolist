@@ -5,11 +5,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract  PostBoard is Ownable{
   string greet ;
   uint randMod = 16;      // uuid length
-  address owner;
+
 
   struct Post{
     uint uuid;
     string content;
+    string title;
   }
 
   Post[] public posts;
@@ -17,23 +18,36 @@ contract  PostBoard is Ownable{
   mapping(uint => address) postToOwner;
   mapping(address => uint) ownerPostCount;
 
-  constructor(string _greet) {
-    createPost(999,"Init Paste");
+  constructor(string memory _greet) {
+    createPost(999,"Init Paste","init title");
     greet = _greet;   // owners greet just checking getters and setters
   }
 
   /// methods
+  function createPost(uint _endTime, string memory _content, string memory _title) public{
 
-  function createPost(uint _endTime, string memory _content) public{
-
-    //  uint _postId = posts.push( Post( _generateUUID(_content), _content) ) - 1 ; // earlier push used to return length
-    posts.push( Post( _generateUUID(_content), _content) ) ; //
+    //  uint _postId = posts.push( Post( _generateUUID(_content), _content, _title) ) - 1 ; // earlier push used to return length
+    posts.push( Post( _generateUUID(_content), _content, _title) ) ; //
 
     uint _postId = posts.length;
     postsEndTime.push(uint(block.timestamp  + (_endTime*86400)));      // now is deprecated  so,block.timestamp is used
     postToOwner[_postId] = msg.sender;
     ownerPostCount[msg.sender]++;
   }
+/*
+  function editTitle(uint _postId, string memory _title) public {  // only endTime or title is editable
+    require(msg.sender == postToOwner[_postId])    ;  // check for original postToOwner
+    //reset _title
+    posts[_postId].title = _title;
+
+  }
+
+  function editEndtime(uint _postId, uint _endTime) public {  // only endTime or title is editable
+    require(msg.sender == postToOwner[_postId])    ;  // check for original postToOwner
+    // reset endTime
+    postsEndTime[_postId] = _endTime;
+  }
+ */
 
   // client side optimisation
   function getEndTimeArray() public view onlyOwner returns(uint[] memory){
@@ -45,6 +59,8 @@ contract  PostBoard is Ownable{
     uint rand = uint(keccak256(abi.encodePacked(_str)));
     return  rand % randMod;
   }
+
+
 
   function setGreet(string memory _greet) public onlyOwner{
     greet = _greet;
